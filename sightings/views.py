@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Squirrel
 # Create your views here.
 
 def all_squirrels(request):
-    return HttpResponse("Later I will list all squirrel sightings with links to edit and add sightings!")
+    squirrels = Squirrel.objects.all()
+    context = {
+            'squirrels':squirrels,
+            }
+    return render(request,'sightings/all.html',context)
