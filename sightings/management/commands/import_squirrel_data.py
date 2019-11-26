@@ -3,11 +3,19 @@ import csv
 import datetime
 from sightings.models import Squirrel
 
+def str_bool(s):
+    if s.lower() == "true":
+        return True
+    else:
+        return False
+
 class Command(BaseCommand):
     help = 'Import data from csv file'
+    
 
     def add_arguments(self, parser):
         parser.add_argument('file_path', nargs='+', type=str,help="The path of the source csv file")
+        
 
     def handle(self, *args, **options):
         file_path = options['file_path'][0]
@@ -20,6 +28,7 @@ class Command(BaseCommand):
                     pass_signal = False
                     continue
                 else:
+                
                     if row[7] not in ['Adult', 'Juvenile']:
                         r_age = Squirrel.OTHER
                     elif row[7] == 'Adult':
@@ -53,20 +62,20 @@ class Command(BaseCommand):
                         pri_color=r_pri_color,
                         location=r_location,
                         specific_location=row[14],
-                        running=bool(row[15]),
-                        chasing=bool(row[16]),
-                        climbing=bool(row[17]),
-                        eating=bool(row[18]),
-                        foraging=bool(row[19]),
+                        running=str_bool(row[15]),
+                        chasing=str_bool(row[16]),
+                        climbing=str_bool(row[17]),
+                        eating=str_bool(row[18]),
+                        foraging=str_bool(row[19]),
                         other_activities=row[20],
-                        kuks=bool(row[21]),
-                        quaas=bool(row[22]),
-                        moans=bool(row[23]),
-                        tail_flags=bool(row[24]),
-                        tail_twitches=bool(row[25]),
-                        approaches=bool(row[26]),
-                        indifferent=bool(row[27]),
-                        runs_from=bool(row[28])
+                        kuks=str_bool(row[21]),
+                        quaas=str_bool(row[22]),
+                        moans=str_bool(row[23]),
+                        tail_flags=str_bool(row[24]),
+                        tail_twitches=str_bool(row[25]),
+                        approaches=str_bool(row[26]),
+                        indifferent=str_bool(row[27]),
+                        runs_from=str_bool(row[28])
                         )
             
         self.stdout.write(self.style.SUCCESS('Successfully load data from %s' % file_path))
