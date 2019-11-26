@@ -149,5 +149,5 @@ class Squirrel(models.Model):
         )
     
     def __str__(self):
-        return squirrel_id
+        return self.squirrel_id
     
