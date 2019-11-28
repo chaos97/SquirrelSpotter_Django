@@ -9,3 +9,11 @@ def all_squirrels(request):
             'squirrels':squirrels,
             }
     return render(request,'sightings/all.html',context)
+
+
+def squirrel_map(request):
+    squirrels = Squirrel.objects.all()
+    context = {
+            'squirrels':squirrels,
+            }
+    return render(request,'sightings/map.html',context)
