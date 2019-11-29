@@ -9,3 +9,11 @@ def all_squirrels(request):
             'squirrels':squirrels,
             }
     return render(request,'sightings/all.html',context)
+
+
+def every_squirrel(request, squirrel_id):
+    return HttpResponse("You're looking at squirrel %s." % squirrel_id)
+
+
+
+
