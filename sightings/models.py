@@ -13,6 +13,7 @@ class Squirrel(models.Model):
     squirrel_id = models.CharField(
             max_length = 1000,
             help_text = _('Unique Squirrel ID'),
+            unique = True,
             )
     
     PM = 'PM'
@@ -76,6 +77,7 @@ class Squirrel(models.Model):
     specific_location=models.CharField(
             max_length = 1000,
             help_text = _('specific location of squirrel'),
+            blank = True,
             )
     
     running = models.BooleanField(
@@ -106,6 +108,7 @@ class Squirrel(models.Model):
     other_activities = models.CharField(
             max_length = 1000,
             help_text = _('other actions of squirrel besides running, chasing, climbing, eating and foraging'),
+            blank = True,
             )
     
     kuks = models.BooleanField(
