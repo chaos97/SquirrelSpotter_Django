@@ -4,26 +4,59 @@
   <title>Squirrel List</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/ddjquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+    body {font-family: "Times New Roman", Georgia, Serif;}
+    h1, h2, h3, h4, h5, h6 {
+      font-family: "Playfair Display";
+      letter-spacing: 5px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:3px;">
+    <a href="/sightings/" class="w3-bar-item w3-button" style="font-size:25px; font-weight:bold">Squirrel Planet</a>
+    <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="/sightings/add" class="w3-bar-item w3-button" role="button" style="font-size:20px;">Add</a>
+      <a href="/map/" class="w3-bar-item w3-button" style="font-size:20px;">Map</a>
+      <a href="/sightings/stats/" class="w3-bar-item w3-button" style="font-size:20px;">Statistics</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
+  <img class="w3-image" src="http://petapixel.com/assets/uploads/2019/09/flowerfeattt-800x420.jpg" alt="Squirrel is cute!" style="width:100%">
+  <div class="w3-display-bottomleft w3-padding-large w3-opacity">
+    <h1 class="w3-xxlarge" style="color:#FFFFFF">All Squirrels</h1>
+  </div>
+</header>
+
+<div class="w3-content" style="max-width:1100px; padding:50px 60px 50px;">
   {% if messages %}
     {% for message in messages %}
      {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
     {% endfor %}
   {% endif %}
-  <h1>All Squirrels List</h1>
-  <a href="/sightings/add" class="btn btn-info" role="button">Add</a>
+  
+  
   <div class="list-group">
         {% for squirrel in squirrels %}
-	<a href="/sightings/{{squirrel.squirrel_id}}/" class="list-group-item list-group-item-action">{{squirrel.squirrel_id}}</a>
+        <a href="/sightings/{{squirrel.squirrel_id}}/" class="list-group-item list-group-item-action">{{squirrel.squirrel_id}}</a>
         {% endfor %}
   </div>
+  
+  
 </div>
 
 </body>
