@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Statistics Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/ddjquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+  <!--Header part-->
+  <div class="w3-display-container" style="margin-bottom:40px">
+      <img src="https://s3-us-west-1.amazonaws.com/k1w1-aha-blog/uploads-v2/2018/04/office-squirrel.jpg" style="width:100%">
+      <div class="w3-display-bottomleft w3-container w3-amber w3-hover-orange w3-hide-small"
+       style="bottom:10%;opacity:0.7;width:70%">
+      <h1><b>Statistics<br>All about Squirrels</b></h1>
+      </div>
+  </div>
+  
+  <!--Row 1-->
+  <div class="w3-row w3-container" style="margin:50px 5px 50px">
+  <!--Row 1 Left Part-->
+  <div class="w3-half w3-container">
+      <div class="w3-topbar w3-border-amber">
+      <div id="container" style="padding-top:12px"></div>
+      </div>
+  </div>
+  
+  <!--Row 1 Right Part-->
+  <div class="w3-half w3-container">
+      <div class="w3-topbar w3-border-amber">
+      <div id="container4" style="padding-top:12px"></div>
+      </div>
+  </div>
+  </div>
+  
+  
+  <!--Row 2-->
+  <div class="w3-row w3-container" style="margin:50px 5px 50px">
+      <div class="w3-topbar w3-border-amber">
+      <div id="container2" style="padding-top:12px"></div>
+      </div>
+  </div>
+  
+  
+  <!--Row 3-->
+  <div class="w3-row w3-container" style="margin:50px 5px 0">
+      <div class="w3-topbar w3-border-amber">
+      <div id="container3" style="padding-top:12px"></div>
+      </div>
+  </div>
+  
+  
+  <script src="https://code.highcharts.com/highcharts.src.js"></script>
+  <script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+  <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <script>
+    Highcharts.chart('container', {{pie_chart|safe}});
+    Highcharts.chart('container2', {{column_chart|safe}});
+    Highcharts.chart('container4', {{line_chart|safe}});
+    Highcharts.chart('container3', {
+            'chart': {
+                'type': 'heatmap',
+                'marginTop': 40,
+                'marginBottom': 80,
+                'plotBorderWidth': 1,
+                'height':600,
+            },
+
+
+            'title': {
+                'text': 'Correlation between Activities'
+            },
+
+            'xAxis': {
+                'categories': {{axis|safe}}
+            },
+
+            'yAxis': {
+                'categories': {{axis|safe}},
+                'title': null,
+                'reversed': false
+            },
+
+            'colorAxis': {
+                'min': -1,
+                'max': 1,
+                'minColor': '#FFFFFF',
+                'maxColor': '#FC9C4E'
+            },
+
+            'legend': {
+                'align': 'right',
+                'layout': 'vertical',
+                'margin': 0,
+                'verticalAlign': 'top',
+                'y': 25,
+                'symbolHeight': 480
+            },
+
+            'tooltip': {
+                'formatter':
+                    
+                    function () {
+                    return '<b>' + this.series.xAxis.categories[this.point.x] + '</b> and <br><b>' +
+                        this.series.yAxis.categories[this.point.y]  + '</b> are correlated with <br><b>' + this.point.value + '</b>';
+                        }
+                    
+            },
+            
+            'series': [{
+                'name': 'Correlation Coefficiency',
+                'borderWidth': 1,
+                'data': {{data|safe}},
+                'dataLabels': {
+                    'enabled': true,
+                    'color': '#000000',
+                    }
+            }],
+
+            'responsive': {
+                'rules': [{
+                    'condition': {
+                        'maxWidth': 500
+                    },
+                    'chartOptions': {
+                        'yAxis': {
+                            'labels': {
+                                'formatter':
+                                    
+                                    function () {
+                                    return this.value.charAt(0);
+                                    }
+                                    
+                            }
+                        }
+                    }
+                }]
+            }
+
+        });
+  </script>
+</body>
+</html>
